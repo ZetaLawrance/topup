@@ -1,16 +1,18 @@
-import React from "react";
-import HomePage from "./Homepage";
-// import Login from "./LoginPage";
-// import Register from "./RegisterPage";
-import "./index.css";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './Homepage';
+import Login from './Login';
+import Register from './Register';
 
 function App() {
   return (
-    <div>
-      <HomePage />
-      {/* <Login />
-      <Register /> */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} /> 
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
   );
 }
 
