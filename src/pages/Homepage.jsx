@@ -24,45 +24,13 @@ import ark from "../assets/ark.jpg";
 import banner from "../assets/banner.jpg";
 import bannerDown from "../assets/banner_down.png";
 import logo from "../assets/icon.png"; 
+import HeaderLayout from '../components/HeaderLayout';
+
 
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-[#1c1c1c] text-white">
-      {/* Header Section */}
-      <header className="bg-[#202020] bg-opacity-80 p-4 shadow-md sticky top-0 z-50 transition-all duration-500 backdrop-blur-md">
-        <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <img src={logo} alt="Logo" className="w-12 h-12 mr-5" />
-            <nav className=" flex space-x-6 text-gray-300 font-bold">
-            <Link to="/" className="flex items-center hover:text-white">
-              <FaHome className="mr-2" /> 
-              Beranda
-            </Link>
-            <Link to="/cek-transaksi" className="flex items-center hover:text-white">
-              <FaHistory className="mr-2" /> 
-              Cek Transaksi
-            </Link>
-            </nav>
-          </div>
-          <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-            <div className="relative" style={{ width: '10rem' }}>
-              <input
-                type="text"
-                placeholder="Search"
-                className="bg-[#333] text-white rounded-full pl-10 pr-10 py-2 w-full transition-all duration-500 focus:outline-none"
-              />
-              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            </div>
-            <Link to="/topup/register" className="bg-[#ff3131] px-4 py-2 rounded-lg font-bold transition-all duration-200 hover:bg-transparent border border-[#ff3131]">
-              Daftar
-            </Link>
-            <Link to="/topup/login" className="bg-[#ff3131] px-4 py-2 rounded-lg font-bold transition-all duration-200 hover:bg-transparent border border-[#ff3131]">
-              Masuk
-            </Link>
-          </div>
-        </div>
-      </header>
-
+      <HeaderLayout />
       {/* Banner Section */}
       <section className="p-8">
         <div className="max-w-screen-xl mx-auto">
@@ -99,41 +67,35 @@ const HomePage = () => {
 
       {/* Additional Games Section */}
       <section className="p-8">
-        <div className="max-w-screen-xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">💎 Daftar Game</h2>
-          <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {[
-              { src: mole, title: "Mobile Legends", developer: "Moonton" },
-              { src: pubeg, title: "PUBG", developer: "Tencent Games" },
-              { src: palo, title: "Valorant", developer: "Riot Games" },
-              { src: bengsin, title: "Genshin Impact", developer: "Hoyoverse" },
-              { src: cod, title: "Call Of Duty Mobile", developer: "Activision" },
-              { src: hok, title: "Honor Of Kings", developer: "Tencent" },
-              { src: epep, title: "Free Fire", developer: "Garena" },
-              { src: hsr, title: "Honkai Star Rail", developer: "Hoyoverse" },
-              { src: lol, title: "League Of Legends", developer: "Riot Games" },
-              { src: aov, title: "Arena Of Valor", developer: "Tencent Games" },
-              { src: fcmobile, title: "FC™ Mobile", developer: "EA Mobile" },
-              { src: ark, title: "Arknights", developer: "Hypergryph" }
-            ].map((game, index) => (
-              <div key={index} className="relative group">
-                <img src={game.src} alt={game.title} className="w-full h-full object-cover rounded-lg" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-80 transition-opacity rounded-lg "></div>
-                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-white">
-                  <p className="text-lg font-semibold">{game.title}</p>
-                  <p className="text-sm">{game.developer}</p>
-                </div>
-              </div>
-            ))}
+  <div className="max-w-screen-xl mx-auto">
+    <h2 className="text-2xl font-bold mb-6">💎 Daftar Game</h2>
+    <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+      {[
+        { src: mole, title: "Mobile Legends", developer: "Moonton", route: "/mlbb" },
+        { src: pubeg, title: "PUBG", developer: "Tencent Games", route: "/pubg" },
+        { src: palo, title: "Valorant", developer: "Riot Games", route: "/valorant" },
+        { src: bengsin, title: "Genshin Impact", developer: "Hoyoverse", route: "/genshin" },
+        { src: cod, title: "Call Of Duty Mobile", developer: "Activision", route: "/codm" },
+        { src: hok, title: "Honor Of Kings", developer: "Tencent", route: "/honorkings" },
+        { src: epep, title: "Free Fire", developer: "Garena", route: "/freefire" },
+        { src: hsr, title: "Honkai Star Rail", developer: "Hoyoverse", route: "/honkai" },
+        { src: lol, title: "League Of Legends", developer: "Riot Games", route: "/lol" },
+        { src: aov, title: "Arena Of Valor", developer: "Tencent Games", route: "/aov" },
+        { src: fcmobile, title: "FC™ Mobile", developer: "EA Mobile", route: "/fcmobile" },
+        { src: ark, title: "Arknights", developer: "Hypergryph", route: "/ark" }
+      ].map((game, index) => (
+        <Link key={index} to={game.route} className="relative group">
+          <img src={game.src} alt={game.title} className="w-full h-full object-cover rounded-lg" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-80 transition-opacity rounded-lg"></div>
+          <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-white">
+            <p className="text-lg font-semibold">{game.title}</p>
+            <p className="text-sm">{game.developer}</p>
           </div>
-
-          {/* <div className="flex justify-center mt-6">
-            <button className="font-medium bg-[#ff3131] px-6 py-2 rounded-2xl hover:bg-[#ff3131]">
-              Tampilkan Lainnya
-            </button>
-          </div> */}
-        </div>
-      </section>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="bg-[#1c1c1c] py-12 px-8 mt-1">
