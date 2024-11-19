@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaHistory, FaSearch } from 'react-icons/fa';
 import logo from '../assets/icon.png'; 
 
 const HeaderLayout = () => {
+  const [isSearchActive, setIsSearchActive] = useState(false);
+
   return (
     <header className="bg-[#202020] bg-opacity-80 p-4 shadow-md sticky top-0 z-50 transition-all duration-500 backdrop-blur-md">
       <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row justify-between items-center">
@@ -21,7 +23,11 @@ const HeaderLayout = () => {
           </nav>
         </div>
         <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-          <div className="relative" style={{ width: '47rem' }}>
+          <div 
+            className={`relative transition-all duration-500 ${isSearchActive ? 'w-[47rem]' : 'w-36'}`}
+            onFocus={() => setIsSearchActive(true)}
+            onBlur={() => setIsSearchActive(false)}
+          >
             <input
               type="text"
               placeholder="Search"
@@ -29,10 +35,10 @@ const HeaderLayout = () => {
             />
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           </div>
-          <Link to="/topup/register" className="bg-[#ff3131] px-4 py-2 rounded-lg font-bold transition-all duration-200 hover:bg-transparent border border-[#ff3131]">
+          <Link to="/register" className="bg-[#ff3131] px-4 py-2 rounded-lg font-bold transition-all duration-200 hover:bg-transparent border border-[#ff3131]">
             Daftar
           </Link>
-          <Link to="/topup/login" className="bg-[#ff3131] px-4 py-2 rounded-lg font-bold transition-all duration-200 hover:bg-transparent border border-[#ff3131]">
+          <Link to="/login" className="bg-[#ff3131] px-4 py-2 rounded-lg font-bold transition-all duration-200 hover:bg-transparent border border-[#ff3131]">
             Masuk
           </Link>
         </div>
