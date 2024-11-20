@@ -1,8 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import HeaderLayout from "../components/HeaderLayout";
-import bannerDown from "../assets/banner_down.png";
+import bannerDown from "../assets/banner_down.png"; // Ganti dengan banner Anda
 
 const Genshin = () => {
+  const [formData, setFormData] = useState({
+    uid: "",
+    server: "",
+    nominal: "",
+    quantity: 1,
+    payment: "",
+    whatsapp: "",
+    promoCode: "",
+  });
+
+  // Update form state
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = () => {
+    const { uid, server, nominal, quantity, payment, whatsapp, promoCode } = formData;
+    const message = `Halo, saya ingin melakukan pembelian:
+- UID: ${uid}
+- Server: ${server}
+- Nominal: ${nominal}
+- Jumlah: ${quantity}
+- Pembayaran: ${payment}
+- No WhatsApp: ${whatsapp}
+- Kode Promo: ${promoCode || "Tidak ada"}
+    
+Tolong bantu prosesnya. Terima kasih!`;
+
+    const waLink = `https://wa.me/62895412974726?text=${encodeURIComponent(message)}`;
+    window.open(waLink, "_blank");
+  };
+
   return (
     <>
       <HeaderLayout />
@@ -21,10 +55,8 @@ const Genshin = () => {
       {/* Main Content Section */}
       <section className="min-h-screen bg-[#1c1c1c] p-8 text-white">
         <div className="max-w-screen-lg mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
-
-          {/* Left Section: Description & Reviews */}
+          {/* Left Section */}
           <div className="md:col-span-4 space-y-6">
-            {/* Description Panel */}
             <div className="bg-[#2e2e2e] p-4 rounded-lg shadow-md">
               <h2 className="text-lg font-bold">Deskripsi dan cara melakukan transaksi</h2>
               <ul className="mt-4 space-y-2 text-sm text-gray-300 list-decimal list-inside">
@@ -38,29 +70,9 @@ const Genshin = () => {
                 <li>GC otomatis masuk ke akun game</li>
               </ul>
             </div>
-
-            {/* Reviews Panel */}
-            <div className="bg-[#2e2e2e] p-4 rounded-lg shadow-md">
-              <h2 className="text-lg font-bold">Ulasan</h2>
-              <div className="flex items-center mt-4">
-                <span className="text-yellow-500 text-3xl font-bold">4.99</span>
-                <span className="ml-2 text-gray-400">/ 5.0</span>
-              </div>
-              <p className="text-sm text-gray-400 mt-2">Pelanggan merasa puas dengan produk ini. Dari 4.95rb ulasan.</p>
-              <div className="mt-4">
-                {/* Individual reviews */}
-                <ul className="space-y-2 text-sm text-gray-300">
-                  <li>628****257: "Puas banget topup disini"</li>
-                  <li>628****679: "Proses cepat banget"</li>
-                  <li>628****945: "Proses cepat banget"</li>
-                  <li>628****584: "Harganya murah"</li>
-                </ul>
-                <button className="mt-4 text-blue-500">Lihat semua ulasan</button>
-              </div>
-            </div>
           </div>
 
-          {/* Right Section: Transaction Form */}
+          {/* Right Section */}
           <div className="md:col-span-8 space-y-6">
             {/* Account Info Input */}
             <div className="bg-[#2e2e2e] p-4 rounded-lg shadow-md">
@@ -68,12 +80,23 @@ const Genshin = () => {
               <div className="flex mt-2 space-x-4">
                 <input
                   type="text"
+                  name="uid"
                   placeholder="Masukkan UID"
+                  value={formData.uid}
+                  onChange={handleChange}
                   className="w-full p-2 rounded bg-[#333] text-white border border-gray-600"
                 />
-                <select className="w-full p-2 rounded bg-[#333] text-white border border-gray-600">
-                  <option>Pilih Server</option>
-                  {/* Add server options here */}
+                <select
+                  name="server"
+                  value={formData.server}
+                  onChange={handleChange}
+                  className="w-full p-2 rounded bg-[#333] text-white border border-gray-600"
+                >
+                  <option value="">Pilih Server</option>
+                  <option value="Asia">Asia</option>
+                  <option value="America">America</option>
+                  <option value="Europe">Europe</option>
+                  <option value="TW/HK/MO">TW/HK/MO</option>
                 </select>
               </div>
             </div>
@@ -82,69 +105,86 @@ const Genshin = () => {
             <div className="bg-[#2e2e2e] p-4 rounded-lg shadow-md">
               <h3 className="text-lg font-bold">2. Pilih Nominal</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-                {/* Add Nominal options here */}
-                <button className="p-3 bg-[#333] rounded-lg text-white text-center border border-gray-700 hover:bg-gray-700">
+                <button
+                  className={`p-3 rounded-lg text-white text-center border ${
+                    formData.nominal === "60 GC - Rp 12,326" ? "bg-gray-700" : "bg-[#333]"
+                  }`}
+                  onClick={() =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      nominal: "60 GC - Rp 12,326",
+                    }))
+                  }
+                >
                   60 GC - Rp 12,326
                 </button>
-                <button className="p-3 bg-[#333] rounded-lg text-white text-center border border-gray-700 hover:bg-gray-700">
+                <button
+                  className={`p-3 rounded-lg text-white text-center border ${
+                    formData.nominal === "330 GC - Rp 62,861" ? "bg-gray-700" : "bg-[#333]"
+                  }`}
+                  onClick={() =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      nominal: "330 GC - Rp 62,861",
+                    }))
+                  }
+                >
                   330 GC - Rp 62,861
                 </button>
-                {/* Repeat for other options */}
               </div>
             </div>
 
-            {/* Quantity Input */}
-            <div className="bg-[#2e2e2e] p-4 rounded-lg shadow-md flex items-center space-x-4">
-              <h3 className="text-lg font-bold">3. Masukkan Jumlah Pembelian</h3>
-              <div className="flex items-center space-x-2">
-                <button className="bg-[#555] p-2 rounded text-white">-</button>
-                <input
-                  type="number"
-                  className="w-16 p-2 rounded bg-[#333] text-white border border-gray-600"
-                  defaultValue={1}
-                />
-                <button className="bg-[#555] p-2 rounded text-white">+</button>
-              </div>
-            </div>
-
-            {/* Payment Selection */}
+            {/* Payment and Contact Section */}
             <div className="bg-[#2e2e2e] p-4 rounded-lg shadow-md">
               <h3 className="text-lg font-bold">4. Pilih Pembayaran</h3>
               <div className="flex flex-col space-y-4 mt-4">
-                <button className="p-3 bg-[#333] rounded-lg text-white text-left border border-gray-700 hover:bg-gray-700">
+                <button
+                  className={`p-3 rounded-lg text-left ${
+                    formData.payment === "Akira Coin - Max Rp 0" ? "bg-gray-700" : "bg-[#333]"
+                  }`}
+                  onClick={() =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      payment: "Akira Coin - Max Rp 0",
+                    }))
+                  }
+                >
                   Akira Coin - Max Rp 0
                 </button>
-                <button className="p-3 bg-[#333] rounded-lg text-white text-left border border-gray-700 hover:bg-gray-700">
+                <button
+                  className={`p-3 rounded-lg text-left ${
+                    formData.payment === "QRIS OVO DANA GOPAY SHOPEEPAY, DLL - Min Rp 10,000"
+                      ? "bg-gray-700"
+                      : "bg-[#333]"
+                  }`}
+                  onClick={() =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      payment: "QRIS OVO DANA GOPAY SHOPEEPAY, DLL - Min Rp 10,000",
+                    }))
+                  }
+                >
                   QRIS OVO DANA GOPAY SHOPEEPAY, DLL - Min Rp 10,000
                 </button>
               </div>
             </div>
 
-            {/* Contact Information */}
             <div className="bg-[#2e2e2e] p-4 rounded-lg shadow-md">
               <h3 className="text-lg font-bold">5. Detail Kontak</h3>
               <input
                 type="text"
+                name="whatsapp"
                 placeholder="Masukkan No WhatsApp"
+                value={formData.whatsapp}
+                onChange={handleChange}
                 className="w-full p-2 mt-2 rounded bg-[#333] text-white border border-gray-600"
               />
             </div>
 
-            {/* Promo Code */}
-            <div className="bg-[#2e2e2e] p-4 rounded-lg shadow-md">
-              <h3 className="text-lg font-bold">6. Kode Promo</h3>
-              <div className="flex space-x-4 mt-2">
-                <input
-                  type="text"
-                  placeholder="Masukkan Kode Promo"
-                  className="w-full p-2 rounded bg-[#333] text-white border border-gray-600"
-                />
-                <button className="p-2 bg-[#555] rounded text-white">Gunakan</button>
-              </div>
-            </div>
-
-            {/* Order Button */}
-            <button className="w-full p-4 bg-[#b08968] rounded-lg text-white font-bold mt-6">
+            <button
+              className="w-full p-4 bg-[#b08968] rounded-lg text-white font-bold mt-6"
+              onClick={handleSubmit}
+            >
               Pesan Sekarang!
             </button>
           </div>
@@ -155,4 +195,3 @@ const Genshin = () => {
 };
 
 export default Genshin;
-  

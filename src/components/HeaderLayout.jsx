@@ -24,7 +24,7 @@ const HeaderLayout = () => {
         </div>
         <div className="flex items-center space-x-4 mt-4 sm:mt-0">
           <div 
-            className={`relative transition-all duration-500 ${isSearchActive ? 'w-[47rem]' : 'w-36'}`}
+            className={`relative transition-all duration-500 ${isSearchActive ? 'w-[59rem]' : 'w-36'}`}
             onFocus={() => setIsSearchActive(true)}
             onBlur={() => setIsSearchActive(false)}
           >
@@ -35,12 +35,12 @@ const HeaderLayout = () => {
             />
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           </div>
-          <Link to="/register" className="bg-[#ff3131] px-4 py-2 rounded-lg font-bold transition-all duration-200 hover:bg-transparent border border-[#ff3131]">
+          {/* <Link to="/register" className="bg-[#ff3131] px-4 py-2 rounded-lg font-bold transition-all duration-200 hover:bg-transparent border border-[#ff3131]">
             Daftar
           </Link>
           <Link to="/login" className="bg-[#ff3131] px-4 py-2 rounded-lg font-bold transition-all duration-200 hover:bg-transparent border border-[#ff3131]">
             Masuk
-          </Link>
+          </Link> */}
         </div>
       </div>
     </header>

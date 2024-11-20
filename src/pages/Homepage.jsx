@@ -1,7 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FaInstagram, FaTiktok, FaEnvelope } from "react-icons/fa";
-import mobileLegends from "../assets/mobilelegends.jpg"; 
-import freeFire from "../assets/freefire.jpg"; 
+import mobileLegends from "../assets/mobilelegends.jpg";
+import freeFire from "../assets/freefire.jpg";
 import pubg from "../assets/pubg.jpg";
 import valorant from "../assets/valorant.jpg";
 import genshin from "../assets/genshin.jpg";
@@ -20,12 +21,26 @@ import aov from "../assets/aov.jpg";
 import fcmobile from "../assets/easport.jpg";
 import ark from "../assets/ark.jpg";
 import bannerDown from "../assets/banner_down.png";
-import logo from "../assets/icon.png"; 
+import logo from "../assets/icon.png";
 import HeaderLayout from '../components/HeaderLayout';
 
 const HomePage = () => {
-  const redirectToWhatsApp = () => {
-    window.location.href = "https://wa.me/62895412974726";
+  const navigate = useNavigate();
+
+  const gameRoutes = {
+    "Mobile Legends": "/mlbb",
+    "Call Of Duty Mobile": "/codm",
+    "Genshin Impact": "/genshin",
+    "Honor Of Kings": "/hok",
+    "PUBG Mobile": "/pubgm",
+    "Valorant": "/valorant",
+  };
+
+  const handleNavigation = (gameTitle) => {
+    const route = gameRoutes[gameTitle];
+    if (route) {
+      navigate(route);
+    }
   };
 
   return (
@@ -52,16 +67,23 @@ const HomePage = () => {
             Berikut adalah beberapa game yang paling populer saat ini.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {[mobileLegends, codm, genshin, honorKings, pubg, valorant].map((gameImage, index) => (
+            {[
+              { img: mobileLegends, title: "Mobile Legends", dev: "Moonton" },
+              { img: codm, title: "Call Of Duty Mobile", dev: "Activision" },
+              { img: genshin, title: "Genshin Impact", dev: "Hoyoverse" },
+              { img: honorKings, title: "Honor Of Kings", dev: "Tencent Games" },
+              { img: pubg, title: "PUBG Mobile", dev: "Tencent Games" },
+              { img: valorant, title: "Valorant", dev: "Riot Games" },
+            ].map((game, index) => (
               <div
                 key={index}
-                onClick={redirectToWhatsApp}
+                onClick={() => handleNavigation(game.title)}
                 className="flex bg-[#333] p-4 rounded-lg items-center space-x-4 shadow-md cursor-pointer transition-transform duration-300 hover:scale-105"
               >
-                <img src={gameImage} alt="Game" className="w-16 h-16 rounded-lg" />
+                <img src={game.img} alt={game.title} className="w-16 h-16 rounded-lg" />
                 <div>
-                  <h3 className="font-semibold">{['Mobile Legends', 'Call Of Duty Mobile', 'Genshin Impact', 'Honor Of Kings', 'PUBG Mobile', 'Valorant'][index]}</h3>
-                  <p className="text-gray-400">{['Moonton', 'Activision', 'Hoyoverse', 'Tencent Games', 'Tencent Games', 'Riot Games'][index]}</p>
+                  <h3 className="font-semibold">{game.title}</h3>
+                  <p className="text-gray-400">{game.dev}</p>
                 </div>
               </div>
             ))}
@@ -76,21 +98,21 @@ const HomePage = () => {
           <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {[
               { src: mole, title: "Mobile Legends", developer: "Moonton" },
-              { src: pubeg, title: "PUBG", developer: "Tencent Games" },
+              { src: pubeg, title: "PUBG Mobile", developer: "Tencent Games" },
               { src: palo, title: "Valorant", developer: "Riot Games" },
               { src: bengsin, title: "Genshin Impact", developer: "Hoyoverse" },
               { src: cod, title: "Call Of Duty Mobile", developer: "Activision" },
-              { src: hok, title: "Honor Of Kings", developer: "Tencent" },
+              { src: hok, title: "Honor Of Kings", developer: "Tencent Games" },
               { src: epep, title: "Free Fire", developer: "Garena" },
               { src: hsr, title: "Honkai Star Rail", developer: "Hoyoverse" },
               { src: lol, title: "League Of Legends", developer: "Riot Games" },
               { src: aov, title: "Arena Of Valor", developer: "Tencent Games" },
               { src: fcmobile, title: "FC™ Mobile", developer: "EA Mobile" },
-              { src: ark, title: "Arknights", developer: "Hypergryph" }
+              { src: ark, title: "Arknights", developer: "Hypergryph" },
             ].map((game, index) => (
               <div
                 key={index}
-                onClick={redirectToWhatsApp}
+                onClick={() => handleNavigation(game.title)}
                 className="relative group cursor-pointer"
               >
                 <img src={game.src} alt={game.title} className="w-full h-full object-cover rounded-lg" />

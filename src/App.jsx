@@ -18,12 +18,12 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/mlbb" element={<Mlbb />} />
+        <Route path="/mlbb" element={<Mlbb />} />
         <Route path="/register" element={<Codm />} />
         <Route path="/genshin" element={<Genshin />} />\
         <Route path="/codm" element={<Hok />} />
         <Route path="/pubm " element={<Pubgm />} />
-        <Route path="/valorant" element={<Valo />} /> */}
+        <Route path="/valorant" element={<Valo />} />
       </Routes>
     </Router>
   );
