@@ -1,5 +1,8 @@
 import React from "react";
 import { FaInstagram, FaTiktok, FaEnvelope } from "react-icons/fa";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import mobileLegends from "../assets/mobilelegends.jpg";
 import freeFire from "../assets/freefire.jpg";
 import pubg from "../assets/pubg.jpg";
@@ -23,11 +26,63 @@ import bannerDown from "../assets/banner_down.png";
 import logo from "../assets/icon.png";
 import HeaderLayout from "../components/HeaderLayout";
 
-const HomePage = () => {
-  const whatsappLink = "https://wa.me/62895412974726";
+const banners = [bannerDown, bannerDown, bannerDown];
 
-  const handleRedirect = () => {
-    window.open(whatsappLink, "_blank"); // Membuka link WhatsApp di tab baru
+const HomePage = () => {
+  const navigate = useNavigate();
+
+  const gameRoutes = {
+    "Mobile Legends": "/mlbb",
+    "Call Of Duty Mobile": "/codm",
+    "Genshin Impact": "/genshin",
+    "Honor Of Kings": "/hok",
+    "PUBG Mobile": "/pubgm",
+    "Valorant": "/valorant",
+  };
+
+  const handleNavigation = (gameTitle) => {
+    const route = gameRoutes[gameTitle];
+    if (route) {
+      navigate(route);
+    }
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    centerMode: true,
+    centerPadding: "20%",
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
+    beforeChange: (current, next) => {
+      document.querySelectorAll(".slick-slide").forEach((slide) => {
+        slide.classList.remove("scale-90", "opacity-75", "z-10");
+      });
+
+      setTimeout(() => {
+        document
+          .querySelector(`.slick-slide[data-index="${next - 1}"]`)
+          ?.classList.add("scale-90", "opacity-75", "z-0");
+        document
+          .querySelector(`.slick-slide[data-index="${next + 1}"]`)
+          ?.classList.add("scale-90", "opacity-75", "z-0");
+      }, 0);
+    },
+    afterChange: (current) => {
+      document.querySelectorAll(".slick-slide").forEach((slide) => {
+        slide.classList.remove("scale-90", "opacity-75", "z-10");
+      });
+
+      document
+        .querySelector(`.slick-slide[data-index="${current - 1}"]`)
+        ?.classList.add("scale-90", "opacity-75", "z-0");
+      document
+        .querySelector(`.slick-slide[data-index="${current + 1}"]`)
+        ?.classList.add("scale-90", "opacity-75", "z-0");
+    },
   };
 
   return (
@@ -35,14 +90,20 @@ const HomePage = () => {
       <HeaderLayout />
       {/* Banner Section */}
       <section className="p-8">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="bg-[#333] rounded-[2rem] shadow-lg overflow-hidden">
-            <img
-              src={bannerDown}
-              alt="Promo Banner"
-              className="w-full h-auto object-cover rounded-[2rem] md:h-[40rem]"
-            />
-          </div>
+        <div className="max-w-screen-xl mx-auto relative">
+          <Slider {...settings}>
+            {banners.map((banner, index) => (
+              <div key={index} className="px-4">
+                <div className="bg-[#333] rounded-[2rem] shadow-lg overflow-hidden transform transition-transform duration-300">
+                  <img
+                    src={banner}
+                    alt={`Banner ${index + 1}`}
+                    className="w-full h-auto object-cover rounded-[2rem]"
+                  />
+                </div>
+              </div>
+            ))}
+          </Slider>
         </div>
       </section>
 
@@ -58,7 +119,11 @@ const HomePage = () => {
               { img: mobileLegends, title: "Mobile Legends", dev: "Moonton" },
               { img: codm, title: "Call Of Duty Mobile", dev: "Activision" },
               { img: genshin, title: "Genshin Impact", dev: "Hoyoverse" },
-              { img: honorKings, title: "Honor Of Kings", dev: "Tencent Games" },
+              {
+                img: honorKings,
+                title: "Honor Of Kings",
+                dev: "Tencent Games",
+              },
               { img: pubg, title: "PUBG Mobile", dev: "Tencent Games" },
               { img: valorant, title: "Valorant", dev: "Riot Games" },
             ].map((game, index) => (
@@ -67,7 +132,11 @@ const HomePage = () => {
                 onClick={handleRedirect}
                 className="flex bg-[#333] p-4 rounded-lg items-center space-x-4 shadow-md cursor-pointer transition-transform duration-300 hover:scale-105"
               >
-                <img src={game.img} alt={game.title} className="w-16 h-16 rounded-lg" />
+                <img
+                  src={game.img}
+                  alt={game.title}
+                  className="w-16 h-16 rounded-lg"
+                />
                 <div>
                   <h3 className="font-semibold">{game.title}</h3>
                   <p className="text-gray-400">{game.dev}</p>
@@ -88,7 +157,11 @@ const HomePage = () => {
               { src: pubeg, title: "PUBG Mobile", developer: "Tencent Games" },
               { src: palo, title: "Valorant", developer: "Riot Games" },
               { src: bengsin, title: "Genshin Impact", developer: "Hoyoverse" },
-              { src: cod, title: "Call Of Duty Mobile", developer: "Activision" },
+              {
+                src: cod,
+                title: "Call Of Duty Mobile",
+                developer: "Activision",
+              },
               { src: hok, title: "Honor Of Kings", developer: "Tencent Games" },
               { src: epep, title: "Free Fire", developer: "Garena" },
               { src: hsr, title: "Honkai Star Rail", developer: "Hoyoverse" },
@@ -105,12 +178,12 @@ const HomePage = () => {
                 <img
                   src={game.src}
                   alt={game.title}
-                  className="w-full h-full object-cover rounded-xl group-hover:rotate-3 group-hover:scale-110 transition-all duration-500 ease-in-out"
+                  className="w-full h-full object-cover rounded-lg"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#ff3131]/70 via-black/60 to-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
-                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out text-white transform translate-y-6 group-hover:translate-y-0">
-                  <p className="text-lg font-bold">{game.title}</p>
-                  <p className="text-sm font-light text-gray-300">{game.developer}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-80 transition-opacity rounded-lg"></div>
+                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-white">
+                  <p className="text-lg font-semibold">{game.title}</p>
+                  <p className="text-sm">{game.developer}</p>
                 </div>
                 <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#ff3131] rounded-xl transition-all duration-500"></div>
               </div>
@@ -123,40 +196,76 @@ const HomePage = () => {
       <footer className="bg-[#1c1c1c] py-12 px-8 mt-1">
         <div className="max-w-screen-xl mx-auto">
           <div className="flex justify-center">
-            <img src={logo} alt="Logo" className="w-24 mb-5 hover:scale-110 transition-transform" />
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-24 mb-5 hover:scale-110 transition-transform"
+            />
           </div>
           <p className="text-center text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed font-bold">
-            Akira Store adalah tempat top up games yang aman, murah, dan terpercaya. Proses cepat 1-3 Detik. Open 24 jam. Payment terlengkap.
+            Akira Store adalah tempat top up games yang aman, murah, dan
+            terpercaya. Proses cepat 1-3 Detik. Open 24 jam. Payment terlengkap.
           </p>
           <div className="flex justify-center space-x-6 mb-8">
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:scale-110 transition-transform">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:scale-110 transition-transform"
+            >
               <FaInstagram className="text-[#ff3131] text-3xl" />
             </a>
-            <a href="https://tiktok.com" target="_blank" rel="noreferrer" className="hover:scale-110 transition-transform">
+            <a
+              href="https://tiktok.com"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:scale-110 transition-transform"
+            >
               <FaTiktok className="text-[#ff3131] text-3xl" />
             </a>
-            <a href="mailto:info@ourastore.com" className="hover:scale-110 transition-transform">
+            <a
+              href="mailto:info@ourastore.com"
+              className="hover:scale-110 transition-transform"
+            >
               <FaEnvelope className="text-[#ff3131] text-3xl" />
             </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-400 text-sm text-center md:text-left">
             <div className="flex flex-col items-center md:items-start">
               <h4 className="font-semibold text-white mb-4">Peta Situs</h4>
-              <a href="#" className="hover:text-white transition-colors">Beranda</a>
-              <a href="#" className="hover:text-white transition-colors">Cek Transaksi</a>
-              <a href="#" className="hover:text-white transition-colors">Hubungi Kami</a>
-              <a href="#" className="hover:text-white transition-colors">Ulasan</a>
+              <a href="#" className="hover:text-white transition-colors">
+                Beranda
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Cek Transaksi
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Hubungi Kami
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Ulasan
+              </a>
             </div>
             <div className="flex flex-col items-center md:items-center">
               <h4 className="font-semibold text-white mb-4">Dukungan</h4>
-              <a href="#" className="hover:text-white transition-colors">Whatsapp</a>
-              <a href="#" className="hover:text-white transition-colors">Instagram</a>
-              <a href="#" className="hover:text-white transition-colors">Email</a>
+              <a href="#" className="hover:text-white transition-colors">
+                Whatsapp
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Instagram
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Email
+              </a>
             </div>
             <div className="flex flex-col items-center md:items-end">
               <h4 className="font-semibold text-white mb-4">Legalitas</h4>
-              <a href="#" className="hover:text-white transition-colors">Kebijakan Privasi</a>
-              <a href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</a>
+              <a href="#" className="hover:text-white transition-colors">
+                Kebijakan Privasi
+              </a>
+              <a href="#" className="hover:text-white transition-colors">
+                Syarat & Ketentuan
+              </a>
             </div>
           </div>
           <hr className="border-t border-gray-700 my-8" />
