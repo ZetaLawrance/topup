@@ -102,7 +102,7 @@ const HomePage = () => {
           <p className="text-gray-400 mb-6">
             Berikut adalah beberapa game yang paling populer saat ini.
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
               { img: mobileLegends, title: "Mobile Legends", dev: "Moonton" },
               { img: codm, title: "Call Of Duty Mobile", dev: "Activision" },
@@ -131,7 +131,7 @@ const HomePage = () => {
       <section className="p-8">
         <div className="max-w-screen-xl mx-auto">
           <h2 className="text-2xl font-bold mb-6">💎 Daftar Game</h2>
-          <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {[
               { src: mole, title: "Mobile Legends", developer: "Moonton" },
               { src: pubeg, title: "PUBG Mobile", developer: "Tencent Games" },
