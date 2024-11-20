@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { FaInstagram, FaTiktok, FaEnvelope } from "react-icons/fa";
 import mobileLegends from "../assets/mobilelegends.jpg";
 import freeFire from "../assets/freefire.jpg";
@@ -22,25 +21,13 @@ import fcmobile from "../assets/easport.jpg";
 import ark from "../assets/ark.jpg";
 import bannerDown from "../assets/banner_down.png";
 import logo from "../assets/icon.png";
-import HeaderLayout from '../components/HeaderLayout';
+import HeaderLayout from "../components/HeaderLayout";
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  const whatsappLink = "https://wa.me/62895412974726";
 
-  const gameRoutes = {
-    "Mobile Legends": "/mlbb",
-    "Call Of Duty Mobile": "/codm",
-    "Genshin Impact": "/genshin",
-    "Honor Of Kings": "/hok",
-    "PUBG Mobile": "/pubgm",
-    "Valorant": "/valorant",
-  };
-
-  const handleNavigation = (gameTitle) => {
-    const route = gameRoutes[gameTitle];
-    if (route) {
-      navigate(route);
-    }
+  const handleRedirect = () => {
+    window.open(whatsappLink, "_blank"); // Membuka link WhatsApp di tab baru
   };
 
   return (
@@ -77,7 +64,7 @@ const HomePage = () => {
             ].map((game, index) => (
               <div
                 key={index}
-                onClick={() => handleNavigation(game.title)}
+                onClick={handleRedirect}
                 className="flex bg-[#333] p-4 rounded-lg items-center space-x-4 shadow-md cursor-pointer transition-transform duration-300 hover:scale-105"
               >
                 <img src={game.img} alt={game.title} className="w-16 h-16 rounded-lg" />
@@ -112,15 +99,20 @@ const HomePage = () => {
             ].map((game, index) => (
               <div
                 key={index}
-                onClick={() => handleNavigation(game.title)}
-                className="relative group cursor-pointer"
+                onClick={handleRedirect}
+                className="relative group cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
               >
-                <img src={game.src} alt={game.title} className="w-full h-full object-cover rounded-lg" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-80 transition-opacity rounded-lg"></div>
-                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity text-white">
-                  <p className="text-lg font-semibold">{game.title}</p>
-                  <p className="text-sm">{game.developer}</p>
+                <img
+                  src={game.src}
+                  alt={game.title}
+                  className="w-full h-full object-cover rounded-xl group-hover:rotate-3 group-hover:scale-110 transition-all duration-500 ease-in-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#ff3131]/70 via-black/60 to-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
+                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out text-white transform translate-y-6 group-hover:translate-y-0">
+                  <p className="text-lg font-bold">{game.title}</p>
+                  <p className="text-sm font-light text-gray-300">{game.developer}</p>
                 </div>
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#ff3131] rounded-xl transition-all duration-500"></div>
               </div>
             ))}
           </div>
