@@ -170,7 +170,49 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer className="bg-[#1c1c1c] py-12 px-8 mt-1">
-        {/* Footer content here */}
+        <div className="max-w-screen-xl mx-auto">
+          <div className="flex justify-center">
+            <img src={logo} alt="Logo" className="w-24 mb-5 hover:scale-110 transition-transform" />
+          </div>
+          <p className="text-center text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed font-bold">
+            Akira Store adalah tempat top up games yang aman, murah, dan terpercaya. Proses cepat 1-3 Detik. Open 24 jam. Payment terlengkap.
+          </p>
+          <div className="flex justify-center space-x-6 mb-8">
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:scale-110 transition-transform">
+              <FaInstagram className="text-[#ff3131] text-3xl" />
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noreferrer" className="hover:scale-110 transition-transform">
+              <FaTiktok className="text-[#ff3131] text-3xl" />
+            </a>
+            <a href="mailto:info@ourastore.com" className="hover:scale-110 transition-transform">
+              <FaEnvelope className="text-[#ff3131] text-3xl" />
+            </a>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-400 text-sm text-center md:text-left">
+            <div className="flex flex-col items-center md:items-start">
+              <h4 className="font-semibold text-white mb-4">Peta Situs</h4>
+              <a href="#" className="hover:text-white transition-colors">Beranda</a>
+              <a href="#" className="hover:text-white transition-colors">Cek Transaksi</a>
+              <a href="#" className="hover:text-white transition-colors">Hubungi Kami</a>
+              <a href="#" className="hover:text-white transition-colors">Ulasan</a>
+            </div>
+            <div className="flex flex-col items-center md:items-center">
+              <h4 className="font-semibold text-white mb-4">Dukungan</h4>
+              <a href="#" className="hover:text-white transition-colors">Whatsapp</a>
+              <a href="#" className="hover:text-white transition-colors">Instagram</a>
+              <a href="#" className="hover:text-white transition-colors">Email</a>
+            </div>
+            <div className="flex flex-col items-center md:items-end">
+              <h4 className="font-semibold text-white mb-4">Legalitas</h4>
+              <a href="#" className="hover:text-white transition-colors">Kebijakan Privasi</a>
+              <a href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</a>
+            </div>
+          </div>
+          <hr className="border-t border-gray-700 my-8" />
+          <div className="text-center text-gray-400">
+            © 2024 Akira Store. All rights reserved.
+          </div>
+        </div>
       </footer>
     </div>
   );
