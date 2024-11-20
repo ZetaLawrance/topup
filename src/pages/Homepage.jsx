@@ -20,8 +20,8 @@ import hok from "../assets/hok.jpg";
 import hsr from "../assets/hsr.jpg";
 import lol from "../assets/lol.jpg";
 import aov from "../assets/aov.jpg";
-import fcmobile from "../assets/easport.jpg";
-import ark from "../assets/ark.jpg";
+import wuwa from "../assets/wuwa.jpg";
+import zzz from "../assets/zzz.jpg";
 import bannerDown from "../assets/banner_down.png";
 import logo from "../assets/icon.png";
 import HeaderLayout from "../components/HeaderLayout";
@@ -82,7 +82,7 @@ const HomePage = () => {
           <Slider {...settings}>
             {banners.map((banner, index) => (
               <div key={index} className="px-4">
-                <div className="bg-[#333] rounded-[2rem] shadow-lg overflow-hidden transform transition-transform duration-300">
+                <div className="bg-[#] rounded-[2rem] shadow-lg overflow-hidden transform transition-transform duration-300">
                   <img
                     src={banner}
                     alt={`Banner ${index + 1}`}
@@ -143,8 +143,8 @@ const HomePage = () => {
               { src: hsr, title: "Honkai Star Rail", developer: "Hoyoverse" },
               { src: lol, title: "League Of Legends", developer: "Riot Games" },
               { src: aov, title: "Arena Of Valor", developer: "Tencent Games" },
-              { src: fcmobile, title: "FC™ Mobile", developer: "EA Mobile" },
-              { src: ark, title: "Arknights", developer: "Hypergryph" },
+              { src: wuwa, title: "Wuthering Wave", developer: "Kuro Games  " },
+              { src: zzz, title: "Zenless Zone Zero", developer: "Hoyoverse" },
             ].map((game, index) => (
               <div
                 key={index}
