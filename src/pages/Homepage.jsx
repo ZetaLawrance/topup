@@ -1,8 +1,14 @@
 import React from "react";
 import { FaInstagram, FaTiktok, FaEnvelope } from "react-icons/fa";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/effect-coverflow";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import mobileLegends from "../assets/mobilelegends.jpg";
 import freeFire from "../assets/freefire.jpg";
 import pubg from "../assets/pubg.jpg";
@@ -26,7 +32,7 @@ import bannerDown from "../assets/banner_down.png";
 import logo from "../assets/icon.png";
 import HeaderLayout from "../components/HeaderLayout";
 
-const banners = [bannerDown, bannerDown, bannerDown];
+const banners = [bannerDown, bannerDown, bannerDown, bannerDown, bannerDown, bannerDown, bannerDown];
 
 const HomePage = () => {
   const whatsappLink = "https://wa.me/62895412974726";
@@ -35,40 +41,57 @@ const HomePage = () => {
     window.open(whatsappLink, "_blank"); // Membuka link WhatsApp di tab baru
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    autoplay: true, // Swipe otomatis
-    autoplaySpeed: 3000, // Waktu jeda dalam milidetik
-    arrows: true, // Tambahkan panah untuk swipe manual
-    centerMode: false, // Tidak ada padding tengah
-    adaptiveHeight: true, // Tinggi responsif
-    swipe: true, // Mengaktifkan swipe manual
-  };
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   autoplay: true, // Swipe otomatis
+  //   autoplaySpeed: 3000, // Waktu jeda dalam milidetik
+  //   arrows: true, // Tambahkan panah untuk swipe manual
+  //   centerMode: false, // Tidak ada padding tengah
+  //   adaptiveHeight: true, // Tinggi responsif
+  //   swipe: true, // Mengaktifkan swipe manual
+  // };
   
   return (
     <div className="min-h-screen bg-[#1c1c1c] text-white">
       <HeaderLayout />
-      {/* Banner Section */}
+      {/* Swiper Banner Section */}
       <section className="p-8">
-      <div className="max-w-screen-xl mx-auto relative">
-        <Slider {...settings}>
+        <div className="max-w-screen-xl mx-auto relative">
+          <Swiper
+            modules={[EffectCoverflow, Pagination, Autoplay]}
+            effect="coverflow"
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            spaceBetween={-50}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            coverflowEffect={{
+              rotate: 30,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            pagination={{ clickable: true }}
+            className="mySwiper"
+          >
           {banners.map((banner, index) => (
-            <div key={index} className="px-4">
-              <div className="rounded-[2rem] shadow-lg overflow-hidden">
-                <img
-                  src={banner}
-                  alt={`Banner ${index + 1}`}
-                  className="w-full h-auto object-cover rounded-[2rem]"
-                />
-              </div>
-            </div>
+            <SwiperSlide key={index} className="rounded-[2rem] shadow-lg overflow-hidden">
+              <img
+                src={banner}
+                alt={`Banner ${index + 1}`}
+                className="w-full h-auto object-cover rounded-[2rem]"
+              />
+            </SwiperSlide>
           ))}
-        </Slider>
-      </div>
-    </section>
+          </Swiper>
+        </div>
+      </section>
 
       {/* Popular Games Section */}
       <section className="p-8">
