@@ -35,7 +35,7 @@ import HeaderLayout from "../components/HeaderLayout";
 const banners = [bannerDown, bannerDown, bannerDown, bannerDown, bannerDown, bannerDown, bannerDown];
 
 const HomePage = () => {
-  const whatsappLink = "https://wa.me/62895412974726";
+  const whatsappLink = "https://wa.me/6281331361426";
 
   const handleRedirect = () => {
     window.open(whatsappLink, "_blank"); // Membuka link WhatsApp di tab baru
