@@ -40,60 +40,35 @@ const HomePage = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    centerMode: true,
-    centerPadding: "20%",
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: false,
-    beforeChange: (current, next) => {
-      document.querySelectorAll(".slick-slide").forEach((slide) => {
-        slide.classList.remove("scale-90", "opacity-75", "z-10");
-      });
-
-      setTimeout(() => {
-        document
-          .querySelector(`.slick-slide[data-index="${next - 1}"]`)
-          ?.classList.add("scale-90", "opacity-75", "z-0");
-        document
-          .querySelector(`.slick-slide[data-index="${next + 1}"]`)
-          ?.classList.add("scale-90", "opacity-75", "z-0");
-      }, 0);
-    },
-    afterChange: (current) => {
-      document.querySelectorAll(".slick-slide").forEach((slide) => {
-        slide.classList.remove("scale-90", "opacity-75", "z-10");
-      });
-
-      document
-        .querySelector(`.slick-slide[data-index="${current - 1}"]`)
-        ?.classList.add("scale-90", "opacity-75", "z-0");
-      document
-        .querySelector(`.slick-slide[data-index="${current + 1}"]`)
-        ?.classList.add("scale-90", "opacity-75", "z-0");
-    },
+    autoplay: true, // Swipe otomatis
+    autoplaySpeed: 3000, // Waktu jeda dalam milidetik
+    arrows: true, // Tambahkan panah untuk swipe manual
+    centerMode: false, // Tidak ada padding tengah
+    adaptiveHeight: true, // Tinggi responsif
+    swipe: true, // Mengaktifkan swipe manual
   };
-
+  
   return (
     <div className="min-h-screen bg-[#1c1c1c] text-white">
       <HeaderLayout />
       {/* Banner Section */}
       <section className="p-8">
-        <div className="max-w-screen-xl mx-auto relative">
-          <Slider {...settings}>
-            {banners.map((banner, index) => (
-              <div key={index} className="px-4">
-                <div className="bg-[#] rounded-[2rem] shadow-lg overflow-hidden transform transition-transform duration-300">
-                  <img
-                    src={banner}
-                    alt={`Banner ${index + 1}`}
-                    className="w-full h-auto object-cover rounded-[2rem]"
-                  />
-                </div>
+      <div className="max-w-screen-xl mx-auto relative">
+        <Slider {...settings}>
+          {banners.map((banner, index) => (
+            <div key={index} className="px-4">
+              <div className="rounded-[2rem] shadow-lg overflow-hidden">
+                <img
+                  src={banner}
+                  alt={`Banner ${index + 1}`}
+                  className="w-full h-auto object-cover rounded-[2rem]"
+                />
               </div>
-            ))}
-          </Slider>
-        </div>
-      </section>
+            </div>
+          ))}
+        </Slider>
+      </div>
+    </section>
 
       {/* Popular Games Section */}
       <section className="p-8">
